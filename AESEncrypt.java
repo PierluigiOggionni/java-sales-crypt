@@ -1,7 +1,9 @@
+
 import java.security.SecureRandom;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
 import javax.xml.bind.DatatypeConverter;
 
 public class AESEncrypt {
@@ -22,8 +24,10 @@ public class AESEncrypt {
   byte[] ivPlusCipher = new byte[iv.length + byteCipherText.length];
   System.arraycopy(iv, 0, ivPlusCipher, 0, iv.length);
   System.arraycopy(byteCipherText, 0, ivPlusCipher, iv.length, byteCipherText.length);
+  String base64Encoded = Base64.getEncoder().encodeToString(ivPlusCipher);
+  return base64Encoded;
   
-  return DatatypeConverter.printBase64Binary(ivPlusCipher);
+//  return DatatypeConverter.printBase64Binary(ivPlusCipher);
  }
  
  public static void main(String[] args) throws Exception {
